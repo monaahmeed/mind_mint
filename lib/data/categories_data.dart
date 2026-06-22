@@ -14,6 +14,6 @@ final List<CategoryModel> categories = [
   CategoryModel(id: 20, displayName: 'Mythology', imagePath: 'assets/images/mythology.png'),
   CategoryModel(id: 21, displayName: 'Music', imagePath: 'assets/images/music.png'),
   CategoryModel(id: 15, displayName: 'video games', imagePath: 'assets/images/video-games.png'),
-  CategoryModel(id: 18, displayName: 'sports', imagePath: 'assets/images/sports.png'),
+  CategoryModel(id: 21, displayName: 'sports', imagePath: 'assets/images/sports.png'),
   
 ];

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mind_mint/business_logic/cubit/questions_cubit.dart';
+import 'package:mind_mint/business_logic/questions_cubit/questions_cubit.dart';
+import 'package:mind_mint/data/model/level_model.dart';
+
 import 'package:mind_mint/data/model/questions_model.dart';
 import 'package:mind_mint/presentation/widgets/inswer_item.dart';
 import 'package:mind_mint/presentation/widgets/question_item.dart';
@@ -9,24 +11,38 @@ import 'package:mind_mint/presentation/widgets/show_submit_dialog.dart';
 
 class QuizViewBody extends StatefulWidget {
   final List<QuestionModel> questions;
-  const QuizViewBody({super.key, required this.questions});
-
+  const QuizViewBody({
+    super.key,
+    required this.questions,
+    this.levelModel,
+    this.categoryName,
+  });
+  final LevelModel? levelModel;
+  final String? categoryName;
   @override
   State<QuizViewBody> createState() => _QuizViewBodyState();
 }
 
 class _QuizViewBodyState extends State<QuizViewBody> {
   int currentIndex = 0;
-  
+
   @override
   Widget build(BuildContext context) {
-    final currentQuestion = widget.questions[currentIndex];
     final cubit = context.watch<QuestionsCubit>();
+    if (cubit.userAnswers.isEmpty && currentIndex != 0) {
+      currentIndex = 0;
+    }
+    final currentQuestion = widget.questions[currentIndex];
     String? currentSelectedAnswer = cubit.userAnswers[currentIndex];
 
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.only(top: 32, right: 16, left: 16, bottom: 16),
+        padding: const EdgeInsets.only(
+          top: 32,
+          right: 16,
+          left: 16,
+          bottom: 16,
+        ),
         child: Column(
           children: [
             QuestionItem(
@@ -34,12 +50,12 @@ class _QuizViewBodyState extends State<QuizViewBody> {
               index: currentIndex,
               totalQuestions: widget.questions.length,
             ),
-      
+
             const SizedBox(height: 24),
-      
+
             ...List.generate(currentQuestion.allAnswers.length, (index) {
               String answerText = currentQuestion.allAnswers[index];
-      
+
               return AnswerItem(
                 label: String.fromCharCode(65 + index),
                 answerText: answerText,
@@ -53,9 +69,9 @@ class _QuizViewBodyState extends State<QuizViewBody> {
                 },
               );
             }),
-      
+
             const SizedBox(height: 50),
-      
+
             QuizNavigationButtons(
               currentIndex: currentIndex,
               totalQuestions: widget.questions.length,
@@ -79,8 +95,11 @@ class _QuizViewBodyState extends State<QuizViewBody> {
                       ),
                     );
                   } else {
-                    
-                    showSubmitDialog(context);
+                    showSubmitDialog(
+                      context: context,
+                      levelModel: widget.levelModel,
+                      categoryName: widget.categoryName,
+                    );
                   }
                 }
               },
@@ -90,7 +109,4 @@ class _QuizViewBodyState extends State<QuizViewBody> {
       ),
     );
   }
-
-
-
 }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mind_mint/business_logic/cubit/questions_cubit.dart';
+import 'package:mind_mint/business_logic/questions_cubit/questions_cubit.dart';
+
 import 'package:mind_mint/data/model/category_model.dart';
 import 'package:mind_mint/presentation/screens/quiz_screen.dart';
 import 'package:mind_mint/presentation/widgets/questions_widgets.dart';

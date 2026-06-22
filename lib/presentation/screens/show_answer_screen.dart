@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mind_mint/business_logic/cubit/questions_cubit.dart';
+
+import 'package:mind_mint/business_logic/questions_cubit/questions_cubit.dart';
 import 'package:mind_mint/constants.dart';
 
 import 'package:mind_mint/presentation/widgets/inswer_item.dart';
@@ -46,35 +47,21 @@ class ShowAnswerScreen extends StatelessWidget {
                       final answer = question.allAnswers[aIndex];
 
                       
-                      // Color bg = const Color(0xffF2EAF9);
-                      // Color border = Colors.transparent;
-                      // IconData? icon;
-
-                      // if (answer == question.correctAnswer) {
-                      //   bg = Colors.green.shade50;
-                      //   border = Colors.green;
-                      //   icon = Icons.check_circle;
-                      // } else if (answer == userAnswer &&
-                      //     answer != question.correctAnswer) {
-                      //   bg = Colors.red.shade50;
-                      //   border = Colors.red;
-                      //   icon = Icons.cancel;
-                      // }
-
+                      
                       return AnswerItem(
                         label: String.fromCharCode(65 + qIndex),
                         answerText: answer,
-                        isSelected: false, // ملوش لازمة هنا
+                        isSelected: false, 
                         onTap: () {},
-                        showResult: true, // فعلنا وضع النتيجة
+                        showResult: true, 
                         isCorrect:
                             answer ==
-                            question.correctAnswer, // لو دي الإجابة الصح
+                            question.correctAnswer, 
                         isWrong:
                             (answer == userAnswer) &&
                             (answer !=
                                 question
-                                    .correctAnswer), // لو المستخدم اختارها وهي غلط
+                                    .correctAnswer), 
                       );
                     }),
                     const Divider(height: 40),

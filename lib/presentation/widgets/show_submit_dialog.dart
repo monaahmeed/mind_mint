@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:mind_mint/constants.dart';
+import 'package:mind_mint/data/model/level_model.dart';
+import 'package:mind_mint/presentation/widgets/costum_app_bar.dart';
+import 'package:mind_mint/presentation/widgets/result_view_body.dart';
 
-void showSubmitDialog(BuildContext context) {
+void showSubmitDialog({
+  required BuildContext context,
+  LevelModel? levelModel,
+  String? categoryName,
+}) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -10,12 +16,11 @@ void showSubmitDialog(BuildContext context) {
         title: const Text("Finish Quiz?"),
         content: const Text("Are you sure you want to submit your answers?"),
         actions: [
-          // زرار التراجع
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: const Text("Cancel", style: TextStyle(color: Colors.grey)),
           ),
-          // زرار التأكيد
+
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xff6D5458),
@@ -23,10 +28,22 @@ void showSubmitDialog(BuildContext context) {
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
+           
+           
             onPressed: () {
               Navigator.pop(context);
-
-              Navigator.pushReplacementNamed(context, resultScreen);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Scaffold(
+                    appBar: const CostumAppBar(),
+                    body: ResultViewBody(
+                      levelModel: levelModel,
+                      categoryName: categoryName,
+                    ),
+                  ),
+                ),
+              );
             },
             child: const Text(
               "Yes, Submit",

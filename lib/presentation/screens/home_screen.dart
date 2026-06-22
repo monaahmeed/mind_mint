@@ -1,71 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:mind_mint/constants.dart';
 import 'package:mind_mint/data/categories_data.dart';
+
 import 'package:mind_mint/presentation/widgets/costum_app_bar.dart';
 import 'package:mind_mint/presentation/widgets/custom_category_card.dart';
+import 'package:mind_mint/presentation/widgets/mode_card.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  String selectedMode = 'free';
+ 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: const Color.fromRGBO(252, 247, 243, 1),
       appBar: const CostumAppBar(),
-      
+
       body: Padding(
         padding: const EdgeInsets.only(top: 32, right: 16, left: 16),
         child: Column(
           children: [
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(24.0),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Colors.white.withOpacity(0.9),
-                    const Color(0xffFAF2F0),
-                  ],
+            Row(
+              children: [
+                CustomModeCard(
+                  tag: 'Quick Start',
+                  title: 'Free Play',
+                  isSelected: selectedMode == 'free',
+                  onTap: () {
+                    setState(() {
+                      selectedMode = 'free';
+                    });
+                  },
                 ),
-                borderRadius: BorderRadius.circular(32),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
-                    blurRadius: 20,
-                    offset: const Offset(0, 10),
-                  ),
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Welcome back,",
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xff8C6A6B),
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-                  const Text(
-                    "mona",
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xff8C6A6B),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    "Ready to nurture your mind today?",
-                    style: TextStyle(fontSize: 16, color: Color(0xff514746)),
-                  ),
-                ],
-              ),
+                const SizedBox(width: 16),
+                CustomModeCard(
+                  tag: 'Challenge',
+                  title: 'Journey\nMode',
+                  isSelected: selectedMode == 'challenge',
+                  onTap: () {
+                    setState(() {
+                      selectedMode = 'challenge';
+                    });
+                  },
+                ),
+              ],
             ),
+
             const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -107,12 +93,19 @@ class HomeScreen extends StatelessWidget {
                   return CustomCategoryCard(
                     category: categories[index],
                     onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        questionsDetailsScreen, 
-                        arguments:
-                            categories[index], 
-                      );
+                      if (selectedMode == 'free') {
+                        Navigator.pushNamed(
+                          context,
+                          questionsDetailsScreen,
+                          arguments: categories[index],
+                        );
+                      } else {
+                        Navigator.pushNamed(
+                          context,
+                          challengeLevelsScreen,
+                          arguments: categories[index],
+                        );
+                      }
                     },
                   );
                 },

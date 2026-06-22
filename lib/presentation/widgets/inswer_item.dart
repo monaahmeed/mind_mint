@@ -24,11 +24,11 @@ class AnswerItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // تحديد الألوان بناءً على الحالة
+    
     Color getBackgroundColor() {
       if (!showResult) return isSelected ? const Color(0xffF2E7F5) : const Color(0xffF2EAF9);
-      if (isCorrect) return const Color(0xffE8F5E9); // أخضر فاتح جداً للصح
-      if (isWrong) return const Color(0xffFFEBEE); // أحمر فاتح جداً للغلط
+      if (isCorrect) return const Color(0xffE8F5E9); 
+      if (isWrong) return const Color(0xffFFEBEE); 
       return const Color(0xffF2EAF9);
     }
 

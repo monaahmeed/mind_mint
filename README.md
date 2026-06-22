@@ -28,3 +28,22 @@ Mind Mint is a professional **Flutter** application designed to gamify the learn
 
 ---
 
+## 📱 Screenshots
+
+<table width="100%">
+  <tr>
+    <td width="33.3%" align="center">
+      <b>Dual-Mode Home Screen</b><br/><br/>
+      <img src="assets/images/home_screen.png" width="250px" alt="Home Screen"/>
+    </td>
+    <td width="33.3%" align="center">
+      <b>Category Insights & Modes</b><br/><br/>
+      <img src="assets/images/category_details.png" width="250px" alt="Category Details"/>
+    </td>
+    <td width="33.3%" align="center">
+      <b>Journey Level Map</b><br/><br/>
+      <img src="assets/images/level_map.png" width="250px" alt="Level Map"/>
+    </td>
+  </tr>
+</table>
+

@@ -1,12 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mind_mint/business_logic/cubit/questions_state.dart';
+
+import 'package:mind_mint/business_logic/questions_cubit/questions_state.dart';
 import 'package:mind_mint/data/model/questions_model.dart';
 import 'package:mind_mint/data/repository/questions_repository.dart';
 
 class QuestionsCubit extends Cubit<QuestionsState> {
   final QuestionsRepository questionsRepository;
   
-  // المخزن بتاعنا
+  
   List<QuestionModel> questions = [];
   Map<int, String> userAnswers = {};
 
